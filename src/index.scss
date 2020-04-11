@@ -9,4 +9,8 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
       monospace;
   }
+  overflow-x: hidden !important;
+  .MuiContainer-root {
+    height: 100vh;
+  }
 }

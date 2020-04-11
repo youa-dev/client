@@ -1,21 +1,30 @@
-$navbar_width_height: 60px;
-$navbar_border: 1px solid #aaa8a8;
+@import "../../../assets/scss/_vars";
 
 .navigation_bar {
+  z-index: 1;
+  position: fixed;
+  top: 0;
   width: 100%;
   height: $navbar_width_height;
   background-color: #fff;
-  border-bottom: $navbar_border;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
   &_logo {
+    background-image: url("../../../assets/img/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     width: $navbar_width_height;
     height: $navbar_width_height;
+    padding: 0 1em;
   }
   &_left_side {
     float: left;
-    border-right: $navbar_border;
+    border-right: 1px solid #d3d2d2;
   }
   &_right_side {
     float: right;
@@ -36,7 +45,7 @@ $navbar_border: 1px solid #aaa8a8;
         transform-origin: 0% 50%;
         display: block;
         content: "";
-        border-bottom: 3px solid #6c63ff;
+        border-bottom: 3px solid $primary_color;
         transform: scaleX(0);
         transition: transform 250ms ease-in-out;
       }
