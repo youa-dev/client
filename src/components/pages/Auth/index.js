@@ -144,16 +144,34 @@ const calls = {
 
 const handleClick = (type, data) => calls[type](data);
 
-const GreeterFooter = () => {};
+const GreeterFooter = () => {
+  return (
+    <p className="auth_form_greeter_footer">
+      {type === "register"
+        ? "Already got an account?"
+        : "Are you new around here?"}{" "}
+      <a
+        className="auth_form_greeter_footer--link"
+        href={type === "register" ? "/login" : "/register"}
+      >
+        Click here
+      </a>{" "}
+      to {type === "register" ? "log in" : "register"}!
+    </p>
+  );
+};
 
 export default function Auth() {
+  document.title = `youa.dev - ${
+    type[0].toUpperCase() + type.substring(1, type.length).toLowerCase()
+  }`;
   return (
     <Container>
       <div className="auth hero">
         <div className="auth_form_wrapper">
           <div className="auth_form_greeter">
             <h1>{type}</h1>
-            <p>Welcome to youa.dev</p>
+            <GreeterFooter />
           </div>
           <form className="auth_form_inputs" noValidate autoComplete="off">
             {formWrapper[type]()}
