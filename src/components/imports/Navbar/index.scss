@@ -10,9 +10,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  -webkit-box-shadow: $shadow;
-  -moz-box-shadow: $shadow;
-  box-shadow: $shadow;
   &_logo {
     background-image: url("../../../assets/img/logo-nobg.png");
     background-size: contain;

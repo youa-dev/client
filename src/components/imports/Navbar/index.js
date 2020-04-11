@@ -7,7 +7,7 @@ const onLogoClick = () => (window.location.href = "/");
 
 export default function Navbar() {
   return (
-    <nav className="navigation_bar">
+    <nav className="navigation_bar shadow">
       <div className="navigation_bar_left_side">
         <div
           className="navigation_bar_logo animateLogo"

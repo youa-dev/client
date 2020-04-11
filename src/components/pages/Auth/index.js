@@ -5,26 +5,41 @@ import {
   InputLabel,
   FormControl,
   Button,
+  Box,
+  Grid,
 } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
 import axios from "axios";
 import generate from "../../../urlGenerator";
+import useForceUpdate from "use-force-update";
 import "./index.scss";
+
+const evt = new Event("forceUpdate");
+
+let errors = [];
+
+const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 
 const type = window.location.pathname.replace("/", "");
 
-const FormButton = (data) => (
-  <Button
-    variant="contained"
-    color="primary"
-    style={{ marginTop: "15px" }}
-    onClick={(e) => {
-      e.preventDefault();
-      handleClick(type, data);
-    }}
-  >
-    Submit
-  </Button>
-);
+const FormButton = (data) => {
+  const handleClick = (data) => {
+    calls[type](data);
+  };
+  return (
+    <Button
+      variant="contained"
+      color="primary"
+      style={{ marginTop: "15px" }}
+      onClick={(e) => {
+        e.preventDefault();
+        handleClick(data);
+      }}
+    >
+      Submit
+    </Button>
+  );
+};
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -120,20 +135,24 @@ const formWrapper = {
 };
 
 const registerUser = async ({ data }) => {
+  errors = [];
   try {
     const res = await axios.post(generate("auth", "/auth/register"), data);
     console.log(res.data);
-  } catch (error) {
-    console.error(error.response.data);
+  } catch ({ response: e }) {
+    errors = Object.keys(e.data).map((k) => e.data[k]);
+    document.dispatchEvent(evt);
   }
 };
 
 const loginUser = async ({ data }) => {
+  errors = [];
   try {
     const res = await axios.post(generate("auth", "/auth/login"), data);
     console.log(res.data);
-  } catch (error) {
-    console.error(error.response.data);
+  } catch ({ response: e }) {
+    errors = Object.keys(e.data).map((k) => e.data[k]);
+    document.dispatchEvent(evt);
   }
 };
 
@@ -141,8 +160,6 @@ const calls = {
   login: loginUser,
   register: registerUser,
 };
-
-const handleClick = (type, data) => calls[type](data);
 
 const GreeterFooter = () => {
   return (
@@ -162,13 +179,15 @@ const GreeterFooter = () => {
 };
 
 export default function Auth() {
+  const forceUpdate = useForceUpdate();
+  document.addEventListener("forceUpdate", forceUpdate);
   document.title = `youa.dev - ${
     type[0].toUpperCase() + type.substring(1, type.length).toLowerCase()
   }`;
   return (
     <Container>
       <div className="auth hero">
-        <div className="auth_form_wrapper">
+        <div className="auth_form_wrapper shadow">
           <div className="auth_form_greeter">
             <h1>{type}</h1>
             <GreeterFooter />
@@ -176,6 +195,23 @@ export default function Auth() {
           <form className="auth_form_inputs" noValidate autoComplete="off">
             {formWrapper[type]()}
           </form>
+        </div>
+
+        <div className="auth_errors">
+          <Grid container spacing={1}>
+            {errors.map((e, i) => (
+              <Grid item xs={12} sm={6}>
+                <Box
+                  bgcolor="error.main"
+                  color="error.contrastText"
+                  p={2}
+                  className="shadow"
+                >
+                  {i + 1}. {e}
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
         </div>
       </div>
     </Container>
