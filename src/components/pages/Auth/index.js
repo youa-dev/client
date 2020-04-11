@@ -10,7 +10,7 @@ import axios from "axios";
 import generate from "../../../urlGenerator";
 import "./index.scss";
 
-const { pathname } = window.location;
+const type = window.location.pathname.replace("/", "");
 
 const FormButton = (data) => (
   <Button
@@ -19,7 +19,7 @@ const FormButton = (data) => (
     style={{ marginTop: "15px" }}
     onClick={(e) => {
       e.preventDefault();
-      handleClick(pathname.replace("/", ""), data);
+      handleClick(type, data);
     }}
   >
     Submit
@@ -48,6 +48,7 @@ const LoginForm = () => {
           onChange={({ target }) => setPassword(target.value)}
         />
       </FormControl>
+      <br />
       <FormButton data={{ email, password }} />
     </div>
   );
@@ -143,7 +144,9 @@ const calls = {
 
 const handleClick = (type, data) => calls[type](data);
 
-export default function Auth({ type }) {
+const GreeterFooter = () => {};
+
+export default function Auth() {
   return (
     <Container>
       <div className="auth hero">

@@ -1,6 +1,8 @@
 import React from "react";
 import "./index.scss";
 
+const type = window.location.pathname.replace("/", "");
+
 const onLogoClick = () => (window.location.href = "/");
 
 export default function Navbar() {
@@ -14,12 +16,20 @@ export default function Navbar() {
       </div>
       <div className="navigation_bar_right_side">
         <div className="navigation_bar_links">
-          <a className="navigation_bar_links--link" href="/register">
-            Sign up
-          </a>
-          <a className="navigation_bar_links--link" href="/login">
-            Log in
-          </a>
+          {type !== "register" ? (
+            <a className="navigation_bar_links--link" href="/register">
+              Sign up
+            </a>
+          ) : (
+            false
+          )}
+          {type !== "login" ? (
+            <a className="navigation_bar_links--link" href="/login">
+              Log in
+            </a>
+          ) : (
+            false
+          )}
         </div>
       </div>
     </nav>

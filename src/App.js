@@ -10,18 +10,8 @@ function App() {
       <Navbar />
       <Router>
         <Route strict exact path="/" component={Home} />
-        <Route
-          strict
-          exact
-          path="/login"
-          component={Auth.bind(null, { type: "login" })}
-        />
-        <Route
-          strict
-          exact
-          path="/register"
-          component={Auth.bind(null, { type: "register" })}
-        />
+        <Route strict exact path="/login" component={Auth} />
+        <Route strict exact path="/register" component={Auth} />
       </Router>
     </div>
   );
