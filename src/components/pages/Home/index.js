@@ -1,13 +1,12 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
+import { Container, Button } from "@material-ui/core";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import "./index.scss";
 
 export default function Home() {
   return (
     <Container>
-      <div className="home">
+      <div className="home hero">
         <div className="home_text">
           <div className="home_text--wrapper">
             <div className="home_text--logo"></div>
@@ -25,6 +24,7 @@ export default function Home() {
             size="large"
             endIcon={<ArrowForwardIosIcon />}
             style={{ marginTop: "15px" }}
+            href="/register"
           >
             Let's get started
           </Button>
