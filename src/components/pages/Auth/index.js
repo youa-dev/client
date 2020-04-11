@@ -6,6 +6,8 @@ import {
   FormControl,
   Button,
 } from "@material-ui/core";
+import axios from "axios";
+import generate from "../../../urlGenerator";
 import "./index.scss";
 
 const LoginForm = () => (
@@ -47,6 +49,33 @@ const formWrapper = {
   register: RegisterForm,
 };
 
+const registerUser = async () => {
+  try {
+    const data = {}; // TODO: Set and read data to/from state using hooks.
+    const res = await axios.post(generate("auth", "/register"), data);
+    console.log(res.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const loginUser = async () => {
+  try {
+    const data = {}; // TODO: Set and read data to/from state using hooks.
+    const res = await axios.post(generate("auth", "/login"), data);
+    console.log(res.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const calls = {
+  login: loginUser,
+  register: registerUser,
+};
+
+const handleClick = (type) => calls[type]();
+
 export default function Auth({ type }) {
   return (
     <Container>
@@ -62,6 +91,10 @@ export default function Auth({ type }) {
               variant="contained"
               color="primary"
               style={{ marginTop: "15px" }}
+              onClick={(e) => {
+                e.preventDefault();
+                handleClick(type);
+              }}
             >
               Submit
             </Button>
