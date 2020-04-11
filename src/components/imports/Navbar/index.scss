@@ -14,7 +14,7 @@
   -moz-box-shadow: $shadow;
   box-shadow: $shadow;
   &_logo {
-    background-image: url("../../../assets/img/logo.png");
+    background-image: url("../../../assets/img/logo-nobg.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -42,6 +42,7 @@
       font-size: 22px;
       display: inline-block;
       color: black;
+      font-weight: bold;
       &:after {
         transform-origin: 0% 50%;
         display: block;

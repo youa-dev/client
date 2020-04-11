@@ -9,7 +9,7 @@ export default function Home() {
       <div className="home hero">
         <div className="home_text">
           <div className="home_text--wrapper">
-            <div className="home_text--logo"></div>
+            <div className="home_text--logo animateLogo"></div>
             <h1 className="home_text--title">youa.dev</h1>
           </div>
           <h3 className="home_text--subtitle">

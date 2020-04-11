@@ -1,0 +1,27 @@
+@import "../../../assets/scss/_vars";
+
+.auth {
+  &_form_wrapper {
+    display: flex;
+    justify-content: space-between;
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    box-shadow: $shadow;
+    .auth_form_greeter,
+    .auth_form_inputs {
+      display: flex;
+      justify-content: center !important;
+      align-items: center !important;
+      flex-direction: column !important;
+      width: 100%;
+      padding: 3em 0;
+    }
+    .auth_form_greeter {
+      background-color: $primary_color;
+      color: white;
+      h1 {
+        text-transform: capitalize;
+      }
+    }
+  }
+}

@@ -30,6 +30,7 @@
     }
   }
   &_svg {
+    z-index: 0;
     float: right;
     background-image: url("../../../assets/svg/1.svg");
     width: 675px;
