@@ -147,7 +147,7 @@ const loginUser = async ({ data }) => {
   errors = [];
   try {
     const res = await axios.post(generate("auth", "/auth/login"), data);
-    localStorage.setItem("token", JSON.stringify(res.data.token));
+    localStorage.setItem("token", res.data.token);
     window.location.href = "/dashboard";
   } catch ({ response: e }) {
     errors = Object.keys(e.data).map((k) => e.data[k]);
