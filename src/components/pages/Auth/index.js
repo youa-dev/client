@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import {
   Container,
   Input,
@@ -8,17 +8,15 @@ import {
   Box,
   Grid,
 } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
 import axios from "axios";
 import generate from "../../../urlGenerator";
 import useForceUpdate from "use-force-update";
+import Navbar from "../../imports/Navbar";
 import "./index.scss";
 
 const evt = new Event("forceUpdate");
 
 let errors = [];
-
-const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 
 const type = window.location.pathname.replace("/", "");
 
@@ -137,8 +135,8 @@ const formWrapper = {
 const registerUser = async ({ data }) => {
   errors = [];
   try {
-    const res = await axios.post(generate("auth", "/auth/register"), data);
-    console.log(res.data);
+    await axios.post(generate("auth", "/auth/register"), data);
+    window.location.href = "/login";
   } catch ({ response: e }) {
     errors = Object.keys(e.data).map((k) => e.data[k]);
     document.dispatchEvent(evt);
@@ -149,7 +147,8 @@ const loginUser = async ({ data }) => {
   errors = [];
   try {
     const res = await axios.post(generate("auth", "/auth/login"), data);
-    console.log(res.data);
+    localStorage.setItem("token", JSON.stringify(res.data.token));
+    window.location.href = "/dashboard";
   } catch ({ response: e }) {
     errors = Object.keys(e.data).map((k) => e.data[k]);
     document.dispatchEvent(evt);
@@ -185,35 +184,38 @@ export default function Auth() {
     type[0].toUpperCase() + type.substring(1, type.length).toLowerCase()
   }`;
   return (
-    <Container>
-      <div className="auth hero">
-        <div className="auth_form_wrapper shadow">
-          <div className="auth_form_greeter">
-            <h1>{type}</h1>
-            <GreeterFooter />
+    <Fragment>
+      <Navbar />
+      <Container>
+        <div className="auth hero">
+          <div className="auth_form_wrapper shadow">
+            <div className="auth_form_greeter">
+              <h1>{type}</h1>
+              <GreeterFooter />
+            </div>
+            <form className="auth_form_inputs" noValidate autoComplete="off">
+              {formWrapper[type]()}
+            </form>
           </div>
-          <form className="auth_form_inputs" noValidate autoComplete="off">
-            {formWrapper[type]()}
-          </form>
-        </div>
 
-        <div className="auth_errors">
-          <Grid container spacing={1}>
-            {errors.map((e, i) => (
-              <Grid item xs={12} sm={6}>
-                <Box
-                  bgcolor="error.main"
-                  color="error.contrastText"
-                  p={2}
-                  className="shadow"
-                >
-                  {i + 1}. {e}
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
+          <div className="auth_errors">
+            <Grid container spacing={1}>
+              {errors.map((e, i) => (
+                <Grid item xs={12} sm={6} key={i}>
+                  <Box
+                    bgcolor="error.main"
+                    color="error.contrastText"
+                    p={2}
+                    className="shadow"
+                  >
+                    {i + 1}. {e}
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </Fragment>
   );
 }

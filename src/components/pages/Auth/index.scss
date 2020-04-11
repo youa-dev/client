@@ -14,10 +14,30 @@
       padding: 3em 0;
     }
     .auth_form_greeter {
-      background-color: $primary_color;
+      position: relative;
+      background-color: $dark_primary_color;
       color: white;
       h1 {
         text-transform: capitalize;
+        font-size: 36px;
+      }
+      &_footer {
+        position: absolute;
+        bottom: 0;
+        font-size: 22px;
+        &--link {
+          text-decoration-color: white;
+          color: white;
+          transition: all ease-in-out 0.15s;
+          &:hover {
+            text-decoration-color: $light_primary_color;
+          }
+        }
+      }
+    }
+    .auth_form_inputs {
+      .MuiButtonBase-root {
+        width: 100%;
       }
     }
   }

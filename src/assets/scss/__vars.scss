@@ -1,4 +1,6 @@
 $primary_color: #6c63ff;
+$dark_primary_color: #3f51b5;
+$light_primary_color: lighten($primary_color, 10%);
 $navbar_width_height: 60px;
 $shadow_color: rgba(102, 102, 102, 1);
 $shadow: 0px 0px 10px -2px $shadow_color;
