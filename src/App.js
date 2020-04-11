@@ -1,12 +1,26 @@
 import React from "react";
-import "./App.css";
+import Navbar from "./components/imports/Navbar";
+import Home from "./components/pages/Home";
+import purple from "@material-ui/core/colors/purple";
+import green from "@material-ui/core/colors/green";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: purple,
+    secondary: green,
+  },
+  status: {
+    danger: "orange",
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <h1>{process.env.REACT_APP_AUTH_SERVICE_URL}</h1>
-      <h1>{process.env.REACT_APP_POSTS_SERVICE_URL}</h1>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Navbar />
+      <Home />
+    </ThemeProvider>
   );
 }
 
