@@ -12,27 +12,27 @@ import axios from "axios";
 import generate from "../../../urlGenerator";
 import useForceUpdate from "use-force-update";
 import Navbar from "../../imports/Navbar";
+import { useHistory } from "react-router-dom";
 import "./index.scss";
 
 const evt = new Event("forceUpdate");
 
 let errors = [];
 
-const type = window.location.pathname.replace("/", "");
+let type = window.location.pathname.replace("/", "");
 
 const FormButton = (data) => {
-  const handleClick = (data) => {
-    calls[type](data);
+  const history = useHistory();
+  const handleClick = (e) => {
+    e.preventDefault();
+    calls[type](data, history);
   };
   return (
     <Button
       variant="contained"
       color="primary"
       style={{ marginTop: "15px" }}
-      onClick={(e) => {
-        e.preventDefault();
-        handleClick(data);
-      }}
+      onClick={handleClick}
     >
       Submit
     </Button>
@@ -132,23 +132,23 @@ const formWrapper = {
   register: RegisterForm,
 };
 
-const registerUser = async ({ data }) => {
+const registerUser = async ({ data }, history) => {
   errors = [];
   try {
     await axios.post(generate("auth", "/auth/register"), data);
-    window.location.href = "/login";
+    history.push("/login");
   } catch ({ response: e }) {
     errors = Object.keys(e.data).map((k) => e.data[k]);
     document.dispatchEvent(evt);
   }
 };
 
-const loginUser = async ({ data }) => {
+const loginUser = async ({ data }, history) => {
   errors = [];
   try {
     const res = await axios.post(generate("auth", "/auth/login"), data);
     localStorage.setItem("token", res.data.token);
-    window.location.href = "/dashboard";
+    history.push("/dashboard");
   } catch ({ response: e }) {
     errors = Object.keys(e.data).map((k) => e.data[k]);
     document.dispatchEvent(evt);
@@ -160,18 +160,18 @@ const calls = {
   register: registerUser,
 };
 
-const GreeterFooter = () => {
+const GreeterFooter = ({ redirect }) => {
   return (
     <p className="auth_form_greeter_footer">
       {type === "register"
         ? "Already got an account?"
         : "Are you new around here?"}{" "}
-      <a
+      <span
         className="auth_form_greeter_footer--link"
-        href={type === "register" ? "/login" : "/register"}
+        onClick={() => redirect(type === "register" ? "/login" : "/register")}
       >
         Click here
-      </a>{" "}
+      </span>{" "}
       to {type === "register" ? "log in" : "register"}!
     </p>
   );
@@ -179,6 +179,8 @@ const GreeterFooter = () => {
 
 export default function Auth() {
   const forceUpdate = useForceUpdate();
+  const history = useHistory();
+  type = window.location.pathname.replace("/", "");
   document.addEventListener("forceUpdate", forceUpdate);
   document.title = `youa.dev - ${
     type[0].toUpperCase() + type.substring(1, type.length).toLowerCase()
@@ -191,7 +193,7 @@ export default function Auth() {
           <div className="auth_form_wrapper shadow">
             <div className="auth_form_greeter">
               <h1>{type}</h1>
-              <GreeterFooter />
+              <GreeterFooter redirect={history.push} />
             </div>
             <form className="auth_form_inputs" noValidate autoComplete="off">
               {formWrapper[type]()}

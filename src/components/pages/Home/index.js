@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
 import { Container, Button } from "@material-ui/core";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { useHistory } from "react-router-dom";
 import Navbar from "../../imports/Navbar";
 import "./index.scss";
 
 export default function Home() {
+  const history = useHistory();
   return (
     <Fragment>
       <Navbar />
@@ -27,7 +29,7 @@ export default function Home() {
               size="large"
               endIcon={<ArrowForwardIosIcon />}
               style={{ marginTop: "15px" }}
-              href="/register"
+              onClick={() => history.push("/register")}
             >
               Let's get started
             </Button>

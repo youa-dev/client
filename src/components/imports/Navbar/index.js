@@ -1,11 +1,12 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./index.scss";
 
-const type = window.location.pathname.replace("/", "");
-
-const onLogoClick = () => (window.location.href = "/");
-
 export default function Navbar() {
+  const history = useHistory();
+  const onLogoClick = () => history.push("/");
+  const onLinkClick = (path) => history.push(path);
+  const type = window.location.pathname.replace("/", "");
   return (
     <nav className="navigation_bar shadow">
       <div className="navigation_bar_left_side">
@@ -17,16 +18,22 @@ export default function Navbar() {
       <div className="navigation_bar_right_side">
         <div className="navigation_bar_links">
           {type !== "register" ? (
-            <a className="navigation_bar_links--link" href="/register">
+            <p
+              className="navigation_bar_links--link"
+              onClick={onLinkClick.bind(null, "/register")}
+            >
               Sign up
-            </a>
+            </p>
           ) : (
             false
           )}
           {type !== "login" ? (
-            <a className="navigation_bar_links--link" href="/login">
+            <p
+              className="navigation_bar_links--link"
+              onClick={onLinkClick.bind(null, "/login")}
+            >
               Log in
-            </a>
+            </p>
           ) : (
             false
           )}
