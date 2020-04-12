@@ -9,7 +9,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import axios from "axios";
-import generate from "../../../urlGenerator";
+import generate from "../../../helpers/urlGenerator";
 import useForceUpdate from "use-force-update";
 import Navbar from "../../imports/Navbar";
 import { useHistory } from "react-router-dom";
