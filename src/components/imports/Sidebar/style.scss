@@ -1,0 +1,25 @@
+@import "../../../assets/scss/_vars";
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  height: 100vh;
+  background-color: $dark_primary_color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  &_icons_list {
+    padding: 0 1em;
+    list-style-type: none;
+    &_icon {
+      font-size: 32px;
+      cursor: pointer;
+      transition: color ease-in-out 0.15s;
+      &:hover {
+        color: $light_primary_color;
+      }
+    }
+  }
+}
