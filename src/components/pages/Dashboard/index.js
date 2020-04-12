@@ -5,24 +5,29 @@ import { useHistory, Redirect } from "react-router-dom";
 import authenticateUser from "../../../helpers/authenticateUser";
 import "./style.scss";
 
-export default function Dashboard() {
+const DashboardComponent = ({ user }) => {
   const history = useHistory();
+  return (
+    <Container>
+      <Sidebar />
+      <div className="dashboard">
+        <h1 className="dashboard_title">Hello, {user.firstName}</h1>
+        <span>{!user.profile ? "You do not have a profile." : ""}</span>
+        <span style={{ cursor: "pointer" }} onClick={() => history.push("/")}>
+          Go back home
+        </span>
+      </div>
+    </Container>
+  );
+};
+
+export default function Dashboard() {
+  document.title = "youa.dev - Dashboard";
   const isAuthenticated = authenticateUser();
   return (
     <Fragment>
       {isAuthenticated ? (
-        <Container>
-          <Sidebar />
-          <div className="dashboard">
-            <h1 className="dashboard_title">Dashboard</h1>
-            <span
-              style={{ cursor: "pointer" }}
-              onClick={() => history.push("/")}
-            >
-              Go back home
-            </span>
-          </div>
-        </Container>
+        <DashboardComponent user={isAuthenticated} />
       ) : (
         <Redirect to="/login" />
       )}

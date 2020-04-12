@@ -137,7 +137,9 @@ const registerUser = async ({ data }, history) => {
   try {
     await axios.post(generate("auth", "/auth/register"), data);
     history.push("/login");
-  } catch ({ response: e }) {
+  } catch (err) {
+    console.log(err);
+    const { response: e } = err;
     errors = Object.keys(e.data).map((k) => e.data[k]);
     document.dispatchEvent(evt);
   }
@@ -149,7 +151,9 @@ const loginUser = async ({ data }, history) => {
     const res = await axios.post(generate("auth", "/auth/login"), data);
     localStorage.setItem("token", res.data.token);
     history.push("/dashboard");
-  } catch ({ response: e }) {
+  } catch (err) {
+    console.log(err);
+    const { response: e } = err;
     errors = Object.keys(e.data).map((k) => e.data[k]);
     document.dispatchEvent(evt);
   }
