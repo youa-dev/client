@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Input, InputLabel, FormControl } from "@material-ui/core";
 import FormButton from "../FormButton";
 import "./style.scss";
+import axios from "axios";
+import urlGenerator from "../../../helpers/urlGenerator";
 
 const onFocus = ({ target }) => {
   const cb = (i) =>
@@ -12,18 +15,20 @@ const onFocus = ({ target }) => {
   icons.forEach(cb);
 };
 
-const onLeaveFocus = () => {
+const onBlur = ({ target }) => {
+  // TODO: Implement a check to see if the input is empty. If not, don't show the icon
   const icons = document.querySelectorAll("span");
   icons.forEach((i) => (i.style.color = "#757575"));
 };
 
 export default function ProfileCreationForm() {
   const [website, setWebsite] = useState();
-  const [gitHub, setGitHub] = useState();
+  const [github, setGitHub] = useState();
   const [dev, setDev] = useState();
   const [stackoverflow, setStackOverflow] = useState();
   const [linkedin, setLinkedIn] = useState();
   const [biography, setBiography] = useState();
+  const history = useHistory();
   const hooksWrapper = {
     website: setWebsite,
     github: setGitHub,
@@ -32,9 +37,17 @@ export default function ProfileCreationForm() {
     linkedin: setLinkedIn,
     biography: setBiography,
   };
-  const handleClick = () =>
-    console.log(website, gitHub, dev, stackoverflow, linkedin, biography);
   const handleChange = ({ target }) => hooksWrapper[target.id](target.value);
+  const handleClick = () => {
+    axios
+      .post(
+        urlGenerator("auth", "/profile/create"),
+        { website, github, dev, stackoverflow, linkedin, biography },
+        { headers: { Authorization: localStorage.token } }
+      )
+      .then(() => history.push("/dashboard"))
+      .catch((e) => console.error(e)); // TODO: Implement proper error handling.
+  };
   return (
     <form
       noValidate
@@ -53,7 +66,7 @@ export default function ProfileCreationForm() {
           type="text"
           onChange={handleChange}
           onFocus={onFocus}
-          onBlur={onLeaveFocus}
+          onBlur={onBlur}
         />
       </FormControl>
       <br />
@@ -68,7 +81,7 @@ export default function ProfileCreationForm() {
           type="text"
           onChange={handleChange}
           onFocus={onFocus}
-          onBlur={onLeaveFocus}
+          onBlur={onBlur}
         />
       </FormControl>
       <br />
@@ -83,7 +96,7 @@ export default function ProfileCreationForm() {
           type="text"
           onChange={handleChange}
           onFocus={onFocus}
-          onBlur={onLeaveFocus}
+          onBlur={onBlur}
         />
       </FormControl>
       <br />
@@ -99,7 +112,7 @@ export default function ProfileCreationForm() {
           type="text"
           onChange={handleChange}
           onFocus={onFocus}
-          onBlur={onLeaveFocus}
+          onBlur={onBlur}
         />
       </FormControl>
       <br />
@@ -114,7 +127,7 @@ export default function ProfileCreationForm() {
           type="text"
           onChange={handleChange}
           onFocus={onFocus}
-          onBlur={onLeaveFocus}
+          onBlur={onBlur}
         />
       </FormControl>
       <br />
@@ -130,7 +143,7 @@ export default function ProfileCreationForm() {
           type="text"
           onChange={handleChange}
           onFocus={onFocus}
-          onBlur={onLeaveFocus}
+          onBlur={onBlur}
         />
       </FormControl>
       <br />

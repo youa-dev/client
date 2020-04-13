@@ -1,0 +1,33 @@
+@import "../../../assets/scss/_vars";
+
+.dashboard_header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &_name {
+    text-transform: capitalize;
+  }
+  &_avatar {
+    margin-top: 25px;
+    width: 128px;
+    height: 128px;
+  }
+  &_links {
+    &_link {
+      font-size: 24px;
+      margin: auto 5px;
+      text-decoration: none;
+      color: $primary_color;
+      transition: color ease-in-out 0.15s;
+      cursor: pointer;
+      &:hover {
+        color: $dark_primary_color;
+      }
+    }
+  }
+}
