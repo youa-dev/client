@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <Fragment>
       <Navbar />
-      <Container>
+      <Container className="fullheight">
         <div className="home hero">
           <div className="home_text">
             <div className="home_text--wrapper">

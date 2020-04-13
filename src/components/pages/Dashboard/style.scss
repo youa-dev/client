@@ -1,6 +1,7 @@
 .dashboard {
-  min-width: 100%;
-  padding: 1em;
+  position: absolute;
+  left: 0;
+  width: 100vw;
   min-height: 100%;
   &_title {
     margin-top: 0;

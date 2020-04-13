@@ -181,7 +181,7 @@ export default function Auth() {
   return (
     <Fragment>
       <Navbar />
-      <Container>
+      <Container className="fullheight">
         <div className="auth hero">
           <div className="auth_form_wrapper shadow">
             <div className="auth_form_greeter">
