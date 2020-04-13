@@ -3,9 +3,18 @@ import { Container } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import authenticateUser from "../../../helpers/authenticateUser";
 import ProfileCreationForm from "../../imports/ProfileCreationForm";
+import useForceUpdate from "use-force-update";
+import ErrorOutput from "../../imports/ErrorOutput";
 import "./style.scss";
 
+let errors = [];
+
 const ProfileCreationComponent = () => {
+  const forceUpdate = useForceUpdate();
+  document.addEventListener("forceUpdate", (e) => {
+    errors = Object.keys(e.detail).map((k) => e.detail[k]);
+    forceUpdate();
+  });
   return (
     <Container>
       <div className="profile_creation hero">
@@ -25,6 +34,7 @@ const ProfileCreationComponent = () => {
           </h3>
         </div>
         <ProfileCreationForm />
+        <ErrorOutput columns={1} errors={errors} />
       </div>
     </Container>
   );

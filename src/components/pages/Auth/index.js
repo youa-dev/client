@@ -1,21 +1,16 @@
 import React, { useState, Fragment } from "react";
-import {
-  Container,
-  Input,
-  InputLabel,
-  FormControl,
-  Box,
-  Grid,
-} from "@material-ui/core";
+import { Container, Input, InputLabel, FormControl } from "@material-ui/core";
 import axios from "axios";
 import generate from "../../../helpers/urlGenerator";
 import useForceUpdate from "use-force-update";
 import Navbar from "../../imports/Navbar";
+import ErrorOutput from "../../imports/ErrorOutput";
 import { useHistory } from "react-router-dom";
 import FormButton from "../../imports/FormButton";
+import forceUpdateEvent from "../../../helpers/forceUpdateEvent";
 import "./style.scss";
 
-const evt = new Event("forceUpdate");
+const evt = forceUpdateEvent();
 
 let errors = [];
 
@@ -192,23 +187,7 @@ export default function Auth() {
               {formWrapper[type]()}
             </form>
           </div>
-
-          <div className="auth_errors">
-            <Grid container spacing={1}>
-              {errors.map((e, i) => (
-                <Grid item xs={12} sm={6} key={i}>
-                  <Box
-                    bgcolor="error.main"
-                    color="error.contrastText"
-                    p={2}
-                    className="shadow"
-                  >
-                    {i + 1}. {e}
-                  </Box>
-                </Grid>
-              ))}
-            </Grid>
-          </div>
+          <ErrorOutput columns={2} errors={errors} />
         </div>
       </Container>
     </Fragment>

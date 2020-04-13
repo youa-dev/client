@@ -5,6 +5,7 @@ import FormButton from "../FormButton";
 import "./style.scss";
 import axios from "axios";
 import urlGenerator from "../../../helpers/urlGenerator";
+import forceUpdateEvent from "../../../helpers/forceUpdateEvent";
 
 const onFocus = ({ target }) => {
   const cb = (i) =>
@@ -46,7 +47,10 @@ export default function ProfileCreationForm() {
         { headers: { Authorization: localStorage.token } }
       )
       .then(() => history.push("/dashboard"))
-      .catch((e) => console.error(e)); // TODO: Implement proper error handling.
+      .catch((e) => {
+        if (e.response)
+          document.dispatchEvent(forceUpdateEvent(e.response.data));
+      }); // TODO: Implement proper error handling.
   };
   return (
     <form
