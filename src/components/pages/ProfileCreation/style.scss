@@ -1,3 +1,13 @@
+@import "../../../assets/scss/_vars";
+
 .profile_creation {
   align-items: center;
+  &_title {
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-color: $dark_primary_color;
+  }
+  &_subtitle {
+    margin: 5px auto;
+  }
 }

@@ -1,0 +1,16 @@
+.profile_creation_form {
+  margin-top: 25px;
+  padding: 1em 3em;
+  .MuiInputLabel-root {
+    width: 100%;
+  }
+  .MuiButton-label {
+    color: white !important;
+  }
+  &_label {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

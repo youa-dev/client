@@ -1,25 +1,29 @@
 import React, { Fragment } from "react";
 import { Container } from "@material-ui/core";
-import { useHistory, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import authenticateUser from "../../../helpers/authenticateUser";
 import ProfileCreationForm from "../../imports/ProfileCreationForm";
 import "./style.scss";
 
-const ProfileCreationComponent = ({ user }) => {
-  const history = useHistory();
+const ProfileCreationComponent = () => {
   return (
     <Container>
       <div className="profile_creation hero">
-        <h1 className="profile_creation_title">
-          Alright {user.firstName}. Time to create your profile!
-        </h1>
-        <span>{!user.profile ? "You do not have a profile." : ""}</span>
-        <span
-          style={{ cursor: "pointer" }}
-          onClick={() => history.push("/dashboard")}
-        >
-          Go back to the dashboard
-        </span>
+        <div className="profile_creation_text">
+          <h1 className="profile_creation_title">
+            Time to create your profile!
+          </h1>
+          <h3 className="profile_creation_subtitle">
+            All of the fields are optional.
+          </h3>
+          <h3 className="profile_creation_subtitle">
+            If you do not want to provide any details, leave the fields blank.
+          </h3>
+          <h3 className="profile_creation_subtitle">
+            Otherwise, please provide valid URLs to whichever field you want to
+            be filled. The biography field is an exception to this.
+          </h3>
+        </div>
         <ProfileCreationForm />
       </div>
     </Container>

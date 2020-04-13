@@ -10,7 +10,7 @@ const FormButton = ({ cb }) => {
     <Button
       variant="contained"
       color="primary"
-      style={{ marginTop: "15px" }}
+      style={{ marginTop: "15px", width: "100%" }}
       onClick={handleClick}
     >
       Submit
