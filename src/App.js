@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./components/pages/Home";
 import Auth from "./components/pages/Auth";
 import Dashboard from "./components/pages/Dashboard";
+import ProfileCreation from "./components/pages/ProfileCreation";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
@@ -12,6 +13,12 @@ function App() {
         <Route strict exact path="/login" component={Auth} />
         <Route strict exact path="/register" component={Auth} />
         <Route strict exact path="/dashboard" component={Dashboard} />
+        <Route
+          strict
+          exact
+          path="/profile-creation"
+          component={ProfileCreation}
+        />
       </Router>
     </div>
   );

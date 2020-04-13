@@ -14,8 +14,20 @@ const DashboardComponent = ({ user }) => {
         <h1 className="dashboard_title">Hello, {user.firstName}</h1>
         <span>{!user.profile ? "You do not have a profile." : ""}</span>
         <span style={{ cursor: "pointer" }} onClick={() => history.push("/")}>
-          Go back home
+          Go back home{" "}
         </span>
+
+        {!user.profile ? (
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => history.push("/profile-creation")}
+          >
+            {" "}
+            Go to profile creation{" "}
+          </span>
+        ) : (
+          false
+        )}
       </div>
     </Container>
   );
@@ -28,6 +40,8 @@ export default function Dashboard() {
     <Fragment>
       {isAuthenticated ? (
         <DashboardComponent user={isAuthenticated} />
+      ) : !isAuthenticated.profile ? (
+        <Redirect to="/profile-creation" />
       ) : (
         <Redirect to="/login" />
       )}
