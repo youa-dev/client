@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import "./index.scss";
+import "./style.scss";
 
 export default function Navbar() {
   const history = useHistory();

@@ -13,7 +13,7 @@ import useForceUpdate from "use-force-update";
 import Navbar from "../../imports/Navbar";
 import { useHistory } from "react-router-dom";
 import FormButton from "../../imports/FormButton";
-import "./index.scss";
+import "./style.scss";
 
 const evt = new Event("forceUpdate");
 
