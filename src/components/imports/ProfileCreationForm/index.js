@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Input, InputLabel, FormControl, Button } from "@material-ui/core";
+import { Input, InputLabel, FormControl } from "@material-ui/core";
+import FormButton from "../FormButton";
 
 export default function ProfileCreationForm() {
   const [website, setWebsite] = useState();
@@ -16,10 +17,8 @@ export default function ProfileCreationForm() {
     linkedin: setLinkedIn,
     biography: setBiography,
   };
-  const handleClick = (e) => {
-    e.preventDefault();
+  const handleClick = () =>
     console.log(website, gitHub, dev, stackoverflow, linkedin, biography);
-  };
   const handleChange = ({ target }) => hooksWrapper[target.id](target.value);
   return (
     <form noValidate autoComplete="off">
@@ -53,12 +52,7 @@ export default function ProfileCreationForm() {
         <Input id="biography" type="text" onChange={handleChange} />
       </FormControl>
       <br />
-      <FormControl>
-        <Button color="primary" variant="contained" onClick={handleClick}>
-          Submit
-        </Button>
-      </FormControl>
-      <br />
+      <FormButton cb={handleClick} />
     </form>
   );
 }

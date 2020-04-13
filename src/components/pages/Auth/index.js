@@ -4,7 +4,6 @@ import {
   Input,
   InputLabel,
   FormControl,
-  Button,
   Box,
   Grid,
 } from "@material-ui/core";
@@ -13,6 +12,7 @@ import generate from "../../../helpers/urlGenerator";
 import useForceUpdate from "use-force-update";
 import Navbar from "../../imports/Navbar";
 import { useHistory } from "react-router-dom";
+import FormButton from "../../imports/FormButton";
 import "./index.scss";
 
 const evt = new Event("forceUpdate");
@@ -21,27 +21,10 @@ let errors = [];
 
 let type = window.location.pathname.replace("/", "");
 
-const FormButton = (data) => {
-  const history = useHistory();
-  const handleClick = (e) => {
-    e.preventDefault();
-    calls[type](data, history);
-  };
-  return (
-    <Button
-      variant="contained"
-      color="primary"
-      style={{ marginTop: "15px" }}
-      onClick={handleClick}
-    >
-      Submit
-    </Button>
-  );
-};
-
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
   return (
     <div>
       <FormControl>
@@ -62,7 +45,7 @@ const LoginForm = () => {
         />
       </FormControl>
       <br />
-      <FormButton data={{ email, password }} />
+      <FormButton cb={() => calls[type]({ email, password }, history)} />
     </div>
   );
 };
@@ -73,6 +56,7 @@ const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const history = useHistory();
   return (
     <div>
       <FormControl>
@@ -121,7 +105,12 @@ const RegisterForm = () => {
       </FormControl>
       <br />
       <FormButton
-        data={{ email, password, firstName, lastName, confirmPassword }}
+        cb={() =>
+          calls[type](
+            { email, password, firstName, lastName, confirmPassword },
+            history
+          )
+        }
       />
     </div>
   );
@@ -132,7 +121,7 @@ const formWrapper = {
   register: RegisterForm,
 };
 
-const registerUser = async ({ data }, history) => {
+const registerUser = async (data, history) => {
   errors = [];
   try {
     await axios.post(generate("auth", "/auth/register"), data);
@@ -145,7 +134,7 @@ const registerUser = async ({ data }, history) => {
   }
 };
 
-const loginUser = async ({ data }, history) => {
+const loginUser = async (data, history) => {
   errors = [];
   try {
     const res = await axios.post(generate("auth", "/auth/login"), data);

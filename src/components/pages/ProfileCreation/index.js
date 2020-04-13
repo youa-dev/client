@@ -3,13 +3,14 @@ import { Container } from "@material-ui/core";
 import { useHistory, Redirect } from "react-router-dom";
 import authenticateUser from "../../../helpers/authenticateUser";
 import ProfileCreationForm from "../../imports/ProfileCreationForm";
+import "./style.scss";
 
 const ProfileCreationComponent = ({ user }) => {
   const history = useHistory();
   return (
     <Container>
-      <div className="dashboard">
-        <h1 className="dashboard_title">
+      <div className="profile_creation hero">
+        <h1 className="profile_creation_title">
           Alright {user.firstName}. Time to create your profile!
         </h1>
         <span>{!user.profile ? "You do not have a profile." : ""}</span>
