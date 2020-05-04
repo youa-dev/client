@@ -7,19 +7,22 @@ import axios from "axios";
 import urlGenerator from "../../../helpers/urlGenerator";
 import forceUpdateEvent from "../../../helpers/forceUpdateEvent";
 
-const onFocus = ({ target }) => {
-  const cb = (i) =>
-    i.getAttribute("data-icon") === target.id
-      ? (i.style.color = "transparent")
-      : false;
+const handleIcons = ({ target, type }) => {
   const icons = document.querySelectorAll("span");
-  icons.forEach(cb);
-};
-
-const onBlur = ({ target }) => {
-  // TODO: Implement a check to see if the input is empty. If not, don't show the icon
-  const icons = document.querySelectorAll("span");
-  icons.forEach((i) => (i.style.color = "#757575"));
+  const manipulateIcon = (hide = true) =>
+    icons.forEach((i) =>
+      i.getAttribute("data-icon") === target.id
+        ? (i.style.color = `${hide ? "transparent" : "#777777"}`)
+        : false
+    );
+  switch (type) {
+    case "focus":
+      manipulateIcon();
+      break;
+    case "blur":
+      manipulateIcon(target.value.trim() !== "");
+      break;
+  }
 };
 
 export default function ProfileCreationForm() {
@@ -70,8 +73,8 @@ export default function ProfileCreationForm() {
           id="website"
           type="text"
           onChange={handleChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={handleIcons}
+          onBlur={handleIcons}
         />
       </FormControl>
       <br />
@@ -85,8 +88,8 @@ export default function ProfileCreationForm() {
           id="github"
           type="text"
           onChange={handleChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={handleIcons}
+          onBlur={handleIcons}
         />
       </FormControl>
       <br />
@@ -100,8 +103,8 @@ export default function ProfileCreationForm() {
           id="dev"
           type="text"
           onChange={handleChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={handleIcons}
+          onBlur={handleIcons}
         />
       </FormControl>
       <br />
@@ -116,8 +119,8 @@ export default function ProfileCreationForm() {
           id="stackoverflow"
           type="text"
           onChange={handleChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={handleIcons}
+          onBlur={handleIcons}
         />
       </FormControl>
       <br />
@@ -131,8 +134,8 @@ export default function ProfileCreationForm() {
           id="linkedin"
           type="text"
           onChange={handleChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={handleIcons}
+          onBlur={handleIcons}
         />
       </FormControl>
       <br />
@@ -147,8 +150,8 @@ export default function ProfileCreationForm() {
           id="biography"
           type="text"
           onChange={handleChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={handleIcons}
+          onBlur={handleIcons}
         />
       </FormControl>
       <br />

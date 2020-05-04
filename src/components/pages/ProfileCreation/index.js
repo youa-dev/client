@@ -9,7 +9,7 @@ import "./style.scss";
 
 let errors = [];
 
-const ProfileCreationComponent = () => {
+const ProfileCreationComponent = ({ name }) => {
   const forceUpdate = useForceUpdate();
   document.addEventListener("forceUpdate", (e) => {
     errors = Object.keys(e.detail).map((k) => e.detail[k]);
@@ -20,7 +20,8 @@ const ProfileCreationComponent = () => {
       <div className="profile_creation hero">
         <div className="profile_creation_text">
           <h1 className="profile_creation_title">
-            Time to create your profile!
+            Time to create your profile,{" "}
+            <span style={{ textTransform: "capitalize" }}>{name}</span>!
           </h1>
           <h3 className="profile_creation_subtitle">
             All of the fields are optional.
@@ -42,13 +43,13 @@ const ProfileCreationComponent = () => {
 
 export default function ProfileCreation() {
   document.title = "youa.dev - Profile Creation";
-  const isAuthenticated = authenticateUser();
+  const { firstName, profile } = authenticateUser();
   return (
     <Fragment>
-      {isAuthenticated.profile ? (
+      {profile ? (
         <Redirect to="/dashboard" />
       ) : (
-        <ProfileCreationComponent user={isAuthenticated} />
+        <ProfileCreationComponent name={firstName} />
       )}
     </Fragment>
   );

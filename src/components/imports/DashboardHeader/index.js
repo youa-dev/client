@@ -67,7 +67,9 @@ export default function DashboardHeader({ user }) {
       </div>
       {/* Biography */}
       {user.profile.biography ? (
-        <p className="dashboard_header_biography">{user.profile.biography}</p>
+        <p className="dashboard_header_biography" style={{ marginBottom: 0 }}>
+          {user.profile.biography}
+        </p>
       ) : (
         false
       )}
