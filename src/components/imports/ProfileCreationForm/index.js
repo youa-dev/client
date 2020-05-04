@@ -39,18 +39,19 @@ export default function ProfileCreationForm() {
     biography: setBiography,
   };
   const handleChange = ({ target }) => hooksWrapper[target.id](target.value);
-  const handleClick = () => {
-    axios
-      .post(
+  const handleClick = async () => {
+    try {
+      const res = await axios.post(
         urlGenerator("auth", "/profile/create"),
         { website, github, dev, stackoverflow, linkedin, biography },
         { headers: { Authorization: localStorage.token } }
-      )
-      .then(() => history.push("/dashboard"))
-      .catch((e) => {
-        if (e.response)
-          document.dispatchEvent(forceUpdateEvent(e.response.data));
-      }); // TODO: Implement proper error handling.
+      );
+      localStorage.token = res.data.token;
+      history.push("/dashboard");
+    } catch (e) {
+      // TODO: Implement proper error handling.
+      if (e.response) document.dispatchEvent(forceUpdateEvent(e.response.data));
+    }
   };
   return (
     <form

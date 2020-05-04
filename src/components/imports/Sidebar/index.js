@@ -5,6 +5,7 @@ import {
   AccountCircle,
   Search,
   Settings,
+  Home,
 } from "@material-ui/icons";
 import "./style.scss";
 
@@ -12,6 +13,9 @@ export default function Sidebar() {
   return (
     <nav className="sidebar">
       <ul className="sidebar_icons_list">
+        <li className="sidebar_icons_list_icon">
+          <Home fontSize="inherit" />
+        </li>
         <li className="sidebar_icons_list_icon">
           <AccountCircle fontSize="inherit" />
         </li>
