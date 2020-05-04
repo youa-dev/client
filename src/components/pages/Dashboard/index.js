@@ -12,7 +12,7 @@ const DashboardComponent = ({ user }) => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const getPosts = async () => {
-      const res = await axios.get(urlGenerator("posts", "/posts/get"), {
+      const res = await axios.get(urlGenerator("posts", "/posts/all"), {
         headers: { Authorization: localStorage.token },
       });
       setPosts(res.data);
