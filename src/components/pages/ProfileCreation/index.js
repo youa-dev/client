@@ -45,12 +45,10 @@ export default function ProfileCreation() {
   const isAuthenticated = authenticateUser();
   return (
     <Fragment>
-      {!isAuthenticated ? ( // If the user is not authenticated, redirect the user back to /login
-        <Redirect to="/login" />
-      ) : isAuthenticated.profile ? ( // Else if the user is authenticated, but it has a profile, go to the dashboard.
+      {isAuthenticated.profile ? (
         <Redirect to="/dashboard" />
       ) : (
-        <ProfileCreationComponent user={isAuthenticated} /> // Else render out the form
+        <ProfileCreationComponent user={isAuthenticated} />
       )}
     </Fragment>
   );

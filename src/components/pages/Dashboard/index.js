@@ -41,9 +41,7 @@ export default function Dashboard() {
   const isAuthenticated = authenticateUser();
   return (
     <Fragment>
-      {!isAuthenticated ? (
-        <Redirect to="/login" />
-      ) : !isAuthenticated.profile ? (
+      {!isAuthenticated.profile ? (
         <Redirect to="/profile-creation" />
       ) : (
         <DashboardComponent user={isAuthenticated} />

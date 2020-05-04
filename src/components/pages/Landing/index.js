@@ -5,24 +5,24 @@ import { useHistory } from "react-router-dom";
 import Navbar from "../../imports/Navbar";
 import "./index.scss";
 
-export default function Home() {
+export default function Landing() {
   const history = useHistory();
   return (
     <Fragment>
       <Navbar />
       <Container className="fullheight">
-        <div className="home hero">
-          <div className="home_text">
-            <div className="home_text--wrapper">
-              <div className="home_text--logo animateLogo"></div>
-              <h1 className="home_text--title">youa.dev</h1>
+        <div className="landing hero">
+          <div className="landing_text">
+            <div className="landing_text--wrapper">
+              <div className="landing_text--logo animateLogo"></div>
+              <h1 className="landing_text--title">youa.dev</h1>
             </div>
-            <h3 className="home_text--subtitle">
+            <h3 className="landing_text--subtitle">
               A networking hub for developers.
             </h3>
           </div>
-          <div className="home_svg"></div>
-          <div className="home_cta">
+          <div className="landing_svg"></div>
+          <div className="landing_cta">
             <Button
               variant="contained"
               color="primary"
