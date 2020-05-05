@@ -133,7 +133,7 @@ const loginUser = async (data, history) => {
   errors = [];
   try {
     const res = await axios.post(generate("auth", "/auth/login"), data);
-    localStorage.setItem("token", res.data.token);
+    await localStorage.setItem("token", res.data.token);
     history.push("/dashboard");
   } catch (err) {
     console.log(err);

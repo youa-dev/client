@@ -14,13 +14,6 @@ function App() {
         <Route strict exact path="/login" component={Auth} />
         <Route strict exact path="/register" component={Auth} />
         <ProtectedRoute path="/dashboard" component={Dashboard} />
-        {/* <Route strict exact path="/dashboard" component={Dashboard} /> */}
-        {/* <Route
-          strict
-          exact
-          path="/profile-creation"
-          component={ProfileCreation}
-        /> */}
         <ProtectedRoute path="/profile-creation" component={ProfileCreation} />
       </Router>
     </div>
