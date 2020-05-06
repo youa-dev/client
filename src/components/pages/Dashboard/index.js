@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
+import PostCard from "../../imports/PostCard";
 import Sidebar from "../../imports/Sidebar";
 import DashboardHeader from "../../imports/DashboardHeader";
 import authenticateUser from "../../../helpers/authenticateUser";
@@ -26,7 +27,20 @@ const DashboardComponent = ({ user }) => {
         <DashboardHeader user={user} />
         <Container>
           {posts.length > 0 ? (
-            posts.map((p) => <p>{p.title}</p>)
+            posts.map((p, i) => (
+              <PostCard
+                avatar={user.profile.profilePicture}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                title={p.title}
+                key={i}
+                createdAt={p.createdAt}
+                handle={p.handle}
+                comments={p.comments.length}
+                likes={p.likes.length}
+                views={p.views}
+              />
+            ))
           ) : (
             <p style={{ textAlign: "center" }}>No posts found.</p>
           )}
