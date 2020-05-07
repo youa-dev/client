@@ -8,8 +8,9 @@ import "./index.scss";
 
 export default function Landing() {
   const history = useHistory();
-  return authenticateUser() ? (
-    <Redirect to="/dashboard" />
+  const user = authenticateUser();
+  return user && user.profile ? (
+    <Redirect to={`/${user.profile.handle}`} />
   ) : (
     <Fragment>
       <Navbar />

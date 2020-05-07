@@ -22,6 +22,8 @@ const handleIcons = ({ target, type }) => {
     case "blur":
       manipulateIcon(target.value.trim() !== "");
       break;
+    default:
+      return;
   }
 };
 
@@ -50,7 +52,7 @@ export default function ProfileCreationForm() {
         { headers: { Authorization: localStorage.token } }
       );
       localStorage.token = res.data.token;
-      history.push("/dashboard");
+      history.push(`/${res.data.profile.handle}`);
     } catch (e) {
       // TODO: Implement proper error handling.
       if (e.response) document.dispatchEvent(forceUpdateEvent(e.response.data));

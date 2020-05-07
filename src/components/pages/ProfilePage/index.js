@@ -107,15 +107,16 @@ const DashboardComponent = ({ user }) => {
   );
 };
 
-export default function Dashboard() {
+export default function Dashboard({ match }) {
+  const handle = match.params.id;
   document.title = "youa.dev - Dashboard";
-  const isAuthenticated = authenticateUser();
+  const user = authenticateUser();
   return (
     <Fragment>
-      {!isAuthenticated.profile ? (
+      {!user.profile ? (
         <Redirect to="/profile-creation" />
       ) : (
-        <DashboardComponent user={isAuthenticated} />
+        <DashboardComponent user={user} />
       )}
     </Fragment>
   );
