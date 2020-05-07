@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 25px;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   width: 50%;
   &_col {
@@ -17,10 +17,50 @@
     &_icon {
       margin: 10px 0;
     }
+    &_text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      &--name {
+        text-transform: capitalize;
+      }
+    }
     &_icon {
       font-weight: bold !important;
       &::before {
         margin-right: 5px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .post_card {
+    width: 75%;
+    &_col {
+      &_avatar {
+        width: 64px;
+        height: 64px;
+      }
+      &_icon,
+      &_text {
+        margin: 5px 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 649px) {
+  .post_card {
+    width: 90%;
+    &_col {
+      &_avatar {
+        width: 64px;
+        height: 64px;
+      }
+      &_icon,
+      &_text {
+        margin: 5px 0;
       }
     }
   }

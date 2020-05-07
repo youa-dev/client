@@ -9,6 +9,56 @@ import urlGenerator from "../../../helpers/urlGenerator";
 import axios from "axios";
 import "./style.scss";
 
+const dateHelper = {
+  months: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "September",
+  ],
+  days: [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ],
+};
+
+const generateDate = (timestamp) => {
+  let ext;
+  const d = new Date(timestamp);
+  const month = dateHelper.months[d.getUTCMonth()];
+  const day = dateHelper.days[d.getUTCDay()];
+  const year = d.getUTCFullYear();
+  const date = d.getUTCDate().toString();
+  switch (date[date.length - 1]) {
+    case "1":
+      ext = "st";
+      break;
+    case "2":
+      ext = "nd";
+      break;
+    case "3":
+      ext = "nd";
+      break;
+    default:
+      ext = "th";
+      break;
+  }
+  return `${day}, ${month} ${date}${ext}, ${year}`;
+};
+
 const DashboardComponent = ({ user }) => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -37,7 +87,7 @@ const DashboardComponent = ({ user }) => {
                 lastName={user.lastName}
                 title={p.title}
                 key={i}
-                createdAt={p.createdAt}
+                createdAt={generateDate(p.createdAt)}
                 handle={p.handle}
                 comments={p.comments.length}
                 likes={p.likes.length}
