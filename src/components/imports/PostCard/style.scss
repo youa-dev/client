@@ -1,0 +1,27 @@
+.post_card {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 25px;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+  &_col {
+    display: flex;
+    flex-direction: column;
+    &_avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+    }
+    &_text,
+    &_icon {
+      margin: 10px 0;
+    }
+    &_icon {
+      font-weight: bold !important;
+      &::before {
+        margin-right: 5px;
+      }
+    }
+  }
+}

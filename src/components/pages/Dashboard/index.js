@@ -25,7 +25,10 @@ const DashboardComponent = ({ user }) => {
       <Sidebar />
       <div className="dashboard">
         <DashboardHeader user={user} />
-        <Container>
+        <Container
+          className="hero"
+          style={{ marginTop: 20, alignItems: "center" }}
+        >
           {posts.length > 0 ? (
             posts.map((p, i) => (
               <PostCard

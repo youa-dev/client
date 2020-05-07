@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import "./style.scss";
 
 export default function PostCard({
   avatar,
@@ -12,16 +14,24 @@ export default function PostCard({
   comments,
 }) {
   return (
-    <div className="post_card">
-      <img src={avatar} alt="avatar" className="post_card_avatar" />
-      <p className="post_card_title">{title}</p>
-      <p className="post_card_title">{handle}</p>
-      <p className="post_card_title">{firstName}</p>
-      <p className="post_card_title">{lastName}</p>
-      <p className="post_card_title">{createdAt}</p>
-      <p className="post_card_title">{likes}</p>
-      <p className="post_card_title">{views}</p>
-      <p className="post_card_title">{comments}</p>
+    <div className="post_card shadow">
+      <div className="post_card_col">
+        <img src={avatar} alt="avatar" className="post_card_col_avatar" />
+      </div>
+      <div className="post_card_col">
+        <Link className="post_card_col_text" to={`/post/${handle}`}>
+          {title}
+        </Link>
+        <p className="post_card_col_text post_card_col_text--name">
+          {firstName} {lastName}
+        </p>
+        <p className="post_card_col_text">{createdAt}</p>
+      </div>
+      <div className="post_card_col">
+        <span className="post_card_col_icon fa fa-heart">{likes}</span>
+        <span className="post_card_col_icon fa fa-eye">{views}</span>
+        <span className="post_card_col_icon fa fa-commenting">{comments}</span>
+      </div>
     </div>
   );
 }

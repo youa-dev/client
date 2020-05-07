@@ -1,13 +1,16 @@
 import React, { Fragment } from "react";
 import { Container, Button } from "@material-ui/core";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import { useHistory } from "react-router-dom";
+import authenticateUser from "../../../helpers/authenticateUser";
+import { useHistory, Redirect } from "react-router-dom";
 import Navbar from "../../imports/Navbar";
 import "./index.scss";
 
 export default function Landing() {
   const history = useHistory();
-  return (
+  return authenticateUser() ? (
+    <Redirect to="/dashboard" />
+  ) : (
     <Fragment>
       <Navbar />
       <Container className="fullheight">
