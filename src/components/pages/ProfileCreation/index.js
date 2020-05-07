@@ -47,7 +47,7 @@ export default function ProfileCreation() {
   return (
     <Fragment>
       {profile ? (
-        <Redirect to="/dashboard" />
+        <Redirect to={`/u/${profile.handle}`} />
       ) : (
         <ProfileCreationComponent name={firstName} />
       )}

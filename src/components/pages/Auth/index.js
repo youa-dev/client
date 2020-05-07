@@ -134,7 +134,7 @@ const loginUser = async (data, history) => {
   try {
     const res = await axios.post(generate("auth", "/auth/login"), data);
     await localStorage.setItem("token", res.data.token);
-    history.push("/dashboard");
+    history.push("/profile-creation");
   } catch (err) {
     console.log(err);
     const { response: e } = err;

@@ -52,7 +52,7 @@ export default function ProfileCreationForm() {
         { headers: { Authorization: localStorage.token } }
       );
       localStorage.token = res.data.token;
-      history.push(`/${res.data.profile.handle}`);
+      history.push(`/u/${res.data.profile.handle}`);
     } catch (e) {
       // TODO: Implement proper error handling.
       if (e.response) document.dispatchEvent(forceUpdateEvent(e.response.data));
