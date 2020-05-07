@@ -4,6 +4,7 @@ import PostCard from "../../imports/PostCard";
 import Sidebar from "../../imports/Sidebar";
 import DashboardHeader from "../../imports/DashboardHeader";
 import urlGenerator from "../../../helpers/urlGenerator";
+import authenticateUser from "../../../helpers/authenticateUser";
 import axios from "axios";
 import "./style.scss";
 
@@ -34,7 +35,7 @@ const dateHelper = {
 };
 
 const generateDate = (timestamp) => {
-  let ext;
+  let extension;
   const d = new Date(timestamp);
   const month = dateHelper.months[d.getUTCMonth()];
   const day = dateHelper.days[d.getUTCDay()];
@@ -42,19 +43,19 @@ const generateDate = (timestamp) => {
   const date = d.getUTCDate().toString();
   switch (date[date.length - 1]) {
     case "1":
-      ext = "st";
+      extension = "st";
       break;
     case "2":
-      ext = "nd";
+      extension = "nd";
       break;
     case "3":
-      ext = "nd";
+      extension = "nd";
       break;
     default:
-      ext = "th";
+      extension = "th";
       break;
   }
-  return `${day}, ${month} ${date}${ext}, ${year}`;
+  return `${day}, ${month} ${date}${extension}, ${year}`;
 };
 
 export default class ProfilePage extends Component {
@@ -94,7 +95,7 @@ export default class ProfilePage extends Component {
       const { user, posts } = this.state;
       return (
         <Container>
-          <Sidebar />
+          <Sidebar user={authenticateUser()} history={this.props.history} />
           <div className="dashboard">
             <DashboardHeader user={user} />
             <Container
