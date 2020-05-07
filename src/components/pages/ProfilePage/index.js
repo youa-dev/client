@@ -1,13 +1,14 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, Component } from "react";
 import { Container } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import PostCard from "../../imports/PostCard";
 import Sidebar from "../../imports/Sidebar";
 import DashboardHeader from "../../imports/DashboardHeader";
-import authenticateUser from "../../../helpers/authenticateUser";
 import urlGenerator from "../../../helpers/urlGenerator";
 import axios from "axios";
 import "./style.scss";
+
+import authenticateUser from "../../../helpers/authenticateUser";
 
 const dateHelper = {
   months: [
@@ -63,9 +64,9 @@ const DashboardComponent = ({ user }) => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const getPosts = async () => {
-      const res = await axios.get(urlGenerator("posts", "/posts/all"), {
-        headers: { Authorization: localStorage.token },
-      });
+      const res = await axios.get(
+        urlGenerator("posts", `/posts/all/${user.id}`)
+      );
       setPosts(res.data);
     };
     getPosts();
@@ -107,17 +108,29 @@ const DashboardComponent = ({ user }) => {
   );
 };
 
-export default function Dashboard({ match }) {
-  const handle = match.params.id;
-  document.title = "youa.dev - Dashboard";
-  const user = authenticateUser();
-  return (
-    <Fragment>
-      {!user.profile ? (
-        <Redirect to="/profile-creation" />
-      ) : (
-        <DashboardComponent user={user} />
-      )}
-    </Fragment>
-  );
+function Dashboard({ match }) {
+  let user;
+  const handle = match.params.handle;
+  useEffect(() => {
+    (async () => {
+      user = await axios.get(urlGenerator("auth", `/profile/get/${handle}`));
+      // document.title = `youa.dev - ${capitalize(user.firstName)} ${capitalize(
+      //   user.lastName
+      // )}`;
+      console.log(user);
+    })();
+  }, []);
+  return <Fragment>{/* {!user ? <p>nope</p> : } */}</Fragment>;
+}
+
+export default class ProfilePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      handle: props.match.params.handle,
+    };
+  }
+  render() {
+    return <DashboardComponent user={authenticateUser()} />;
+  }
 }

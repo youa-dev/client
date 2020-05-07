@@ -13,7 +13,7 @@ function App() {
         <Route strict exact path="/" component={Landing} />
         <Route strict exact path="/login" component={Auth} />
         <Route strict exact path="/register" component={Auth} />
-        <Route path="/:handle" component={ProfilePage} />
+        <Route strict exact path="/u/:handle" component={ProfilePage} />
         <ProtectedRoute path="/profile-creation" component={ProfileCreation} />
       </Router>
     </div>
