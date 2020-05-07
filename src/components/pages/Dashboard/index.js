@@ -77,7 +77,11 @@ const DashboardComponent = ({ user }) => {
         <DashboardHeader user={user} />
         <Container
           className="hero"
-          style={{ marginTop: 20, alignItems: "center" }}
+          style={{
+            marginTop: 20,
+            alignItems: "center",
+            marginBottom: window.innerHeight > 649 ? "auto" : 40,
+          }}
         >
           {posts.length > 0 ? (
             posts.map((p, i) => (
