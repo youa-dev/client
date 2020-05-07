@@ -75,7 +75,7 @@ export default class ProfilePage extends Component {
       );
       this.setState({ user });
       // Posts
-      const posts = await axios.get(
+      const { data: posts } = await axios.get(
         urlGenerator("posts", `/posts/all/${this.state.user.id}`)
       );
       this.setState({ posts });
