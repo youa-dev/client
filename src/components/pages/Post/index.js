@@ -5,6 +5,7 @@ import Header from "../../imports/Header";
 import axios from "axios";
 import urlGenerator from "../../../helpers/urlGenerator";
 import "./style.scss";
+import Comments from "../../imports/Comments";
 
 export default class Post extends Component {
   constructor(props) {
@@ -37,13 +38,14 @@ export default class Post extends Component {
         <Container>
           {/* Load markdown-air CSS stylesheet */}
           <Sidebar history={this.props.history} />
-          <div className="post">
+          <div className="post" style={{ marginBottom: 50 }}>
             <Header user={user} post={post} />
             <div
               style={{ marginTop: 50 }}
               className="markdown-body post_body"
               dangerouslySetInnerHTML={{ __html: post.body }}
             />
+            <Comments comments={post.comments} />
           </div>
         </Container>
       );
