@@ -11,6 +11,9 @@ $header_padding: 25px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  &_post_title {
+    text-overflow: ellipsis;
+  }
   &_name {
     text-transform: capitalize;
   }

@@ -14,7 +14,12 @@ export default function Header({ user, post = false }) {
         {user.firstName} {user.lastName}
       </h3>
       {post ? (
-        <p>Post stuff</p>
+        <h2
+          className="header_post_title"
+          style={{ marginLeft: 10, marginRight: 10 }}
+        >
+          {post.title}
+        </h2>
       ) : (
         <Fragment>
           {/* Links */}

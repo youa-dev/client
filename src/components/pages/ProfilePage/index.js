@@ -73,12 +73,11 @@ export default class ProfilePage extends Component {
       const { data: user } = await axios.get(
         urlGenerator("auth", `/profile/get/${this.props.match.params.handle}`)
       );
-      this.setState({ user });
       // Posts
       const { data: posts } = await axios.get(
-        urlGenerator("posts", `/posts/all/${this.state.user.id}`)
+        urlGenerator("posts", `/posts/all/${user.profile.handle}`)
       );
-      this.setState({ posts });
+      this.setState({ user, posts });
       // Update title
       document.title = `youa.dev - ${capitalize(
         this.state.user.firstName

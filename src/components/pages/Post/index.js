@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "@material-ui/core";
 import Sidebar from "../../imports/Sidebar";
+import Header from "../../imports/Header";
 import axios from "axios";
 import urlGenerator from "../../../helpers/urlGenerator";
 import "./style.scss";
@@ -10,6 +11,7 @@ export default class Post extends Component {
     super(props);
     this.state = {
       post: null,
+      user: null,
     };
   }
   async componentDidMount() {
@@ -17,14 +19,17 @@ export default class Post extends Component {
       const { data: post } = await axios.get(
         urlGenerator("posts", `/posts/get/${this.props.match.params.handle}`)
       );
-      this.setState({ post });
+      const { data: user } = await axios.get(
+        urlGenerator("auth", `/profile/get/${post.author}`)
+      );
+      this.setState({ post, user });
     } catch (error) {
       this.props.history.push("/404");
     }
   }
   render() {
-    const { post } = this.state;
-    if (!post) return <p>Waiting</p>;
+    const { post, user } = this.state;
+    if (!post && !user) return <p>Waiting</p>;
     // TODO: Implement loader
     else {
       return (
@@ -32,11 +37,9 @@ export default class Post extends Component {
           {/* Load markdown-air CSS stylesheet */}
           <Sidebar history={this.props.history} />
           <div className="post">
-            {/* <Header /> */}
-            <h3 className="post_title" style={{ marginTop: 0 }}>
-              {post.title}
-            </h3>
+            <Header user={user} post={post} />
             <div
+              style={{ marginTop: 50 }}
               className="markdown-body post_body"
               dangerouslySetInnerHTML={{ __html: post.body }}
             />
