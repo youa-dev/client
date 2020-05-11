@@ -7,9 +7,11 @@ import {
   Settings,
   Home,
 } from "@material-ui/icons";
+import authenticateUser from "../../../helpers/authenticateUser";
 import "./style.scss";
 
-export default function Sidebar({ user = false, history }) {
+export default function Sidebar({ history }) {
+  const user = authenticateUser();
   return (
     <nav className="sidebar shadow">
       <ul className="sidebar_icons_list">

@@ -4,7 +4,6 @@ import PostCard from "../../imports/PostCard";
 import Sidebar from "../../imports/Sidebar";
 import Header from "../../imports/Header";
 import urlGenerator from "../../../helpers/urlGenerator";
-import authenticateUser from "../../../helpers/authenticateUser";
 import axios from "axios";
 import "./style.scss";
 
@@ -94,7 +93,7 @@ export default class ProfilePage extends Component {
       const { user, posts } = this.state;
       return (
         <Container>
-          <Sidebar user={authenticateUser()} history={this.props.history} />
+          <Sidebar history={this.props.history} />
           <div className="dashboard">
             <Header user={user} />
             <Container
