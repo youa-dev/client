@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import urlGenerator from "../../../helpers/urlGenerator";
+import authenticateUser from "../../../helpers/authenticateUser";
 
 const CommentsCard = ({ details }) => {
   const { author, createdAt, handle, avatar, body } = details;
@@ -15,7 +18,24 @@ const CommentsCard = ({ details }) => {
   );
 };
 
-export default function Comments({ comments }) {
+export default function Comments({ comments, postID }) {
+  const user = authenticateUser();
+
+  const submitComment = async ({ keyCode, target }) => {
+    if (keyCode !== 13) return;
+
+    const { token } = localStorage;
+    const { value: body } = target;
+
+    console.log(token);
+
+    await axios.post(
+      urlGenerator("posts", `/comments/new/${postID}`),
+      { body },
+      { headers: { Authorization: token } }
+    );
+  };
+
   return (
     <div className="comments">
       {comments.length > 0 ? (
@@ -23,7 +43,15 @@ export default function Comments({ comments }) {
       ) : (
         <p>No comments!</p>
       )}
-      <input type="text" placeholder="Comment on this post!" />
+      {user ? (
+        <input
+          type="text"
+          placeholder="Comment on this post!"
+          onKeyDown={submitComment}
+        />
+      ) : (
+        false
+      )}
     </div>
   );
 }

@@ -45,7 +45,7 @@ export default class Post extends Component {
               className="markdown-body post_body"
               dangerouslySetInnerHTML={{ __html: post.body }}
             />
-            <Comments comments={post.comments} />
+            <Comments comments={post.comments} postID={post._id} />
           </div>
         </Container>
       );
