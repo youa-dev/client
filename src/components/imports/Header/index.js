@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import "./style.scss";
 
 export default function Header({ user, post = false }) {
@@ -10,16 +11,70 @@ export default function Header({ user, post = false }) {
         className="header_avatar"
         style={{ borderRadius: "50%" }}
       />
-      <h3 className="header_name">
-        {user.firstName} {user.lastName}
-      </h3>
       {post ? (
-        <h2
-          className="header_post_title"
-          style={{ marginLeft: 10, marginRight: 10 }}
+        <Link
+          className="header_name header_name--link"
+          to={`/u/${user.profile.handle}`}
         >
-          {post.title}
-        </h2>
+          {user.firstName} {user.lastName}
+        </Link>
+      ) : (
+        <h3 className="header_name">
+          {user.firstName} {user.lastName}
+        </h3>
+      )}
+      {post ? (
+        <Fragment>
+          <h2
+            className="header_post_title"
+            style={{ marginLeft: 10, marginRight: 10 }}
+          >
+            {post.title}
+          </h2>
+          <div className="header_post_metadata">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: 10,
+                marginLeft: 10,
+              }}
+            >
+              <span className="header_post_metadata_icon fa fa-heart"></span>
+              <p>{post.likes.length}</p>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: 10,
+                marginLeft: 10,
+              }}
+            >
+              <span className="header_post_metadata_icon fa fa-eye"></span>
+              <p>{post.views}</p>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: 10,
+                marginLeft: 10,
+              }}
+            >
+              <span className="header_post_metadata_icon fa fa-commenting"></span>
+              <p>{post.comments.length}</p>
+            </div>
+          </div>
+        </Fragment>
       ) : (
         <Fragment>
           {/* Links */}
