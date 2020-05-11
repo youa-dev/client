@@ -1,0 +1,48 @@
+@import "../../../assets/scss/_vars";
+
+.comments {
+  margin-top: 25px;
+  width: 80%;
+  .comment_card {
+    padding: 0.5em 1em;
+    margin-bottom: 15px;
+    &_user {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      &_avatar {
+        margin-right: 10px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+      }
+      &_link {
+        cursor: pointer;
+        text-decoration: none;
+        color: #000000;
+        &:after {
+          transform-origin: 0% 50%;
+          display: block;
+          content: "";
+          border-bottom: 3px solid $primary_color;
+          transform: scaleX(0);
+          transition: transform 250ms ease-in-out;
+        }
+        &:hover {
+          &:after {
+            transform: scaleX(1);
+          }
+        }
+      }
+    }
+  }
+  &_input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 649px) {
+  .comments {
+    width: 100%;
+  }
+}
