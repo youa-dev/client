@@ -9,27 +9,33 @@ import "./style.scss";
 import Comments from "../../imports/Comments";
 
 const sendComment = async ({ keyCode, target }, postID) => {
-  if (target.tagName === "INPUT" && keyCode !== 13) return;
+  try {
+    const inputEl = document.getElementById("commentsInput");
+    if (target.tagName === "INPUT" && keyCode !== 13) return;
 
-  const body =
-    target.tagName === "INPUT"
-      ? target.value
-      : document.getElementById("commentInput").value;
-  const { token } = localStorage;
+    const body = target.tagName === "INPUT" ? target.value : inputEl.value;
+    const { token } = localStorage;
 
-  await axios.post(
-    urlGenerator("posts", `/comments/new/${postID}`),
-    { body },
-    { headers: { Authorization: token } }
-  );
+    await axios.post(
+      urlGenerator("posts", `/comments/new/${postID}`),
+      { body },
+      { headers: { Authorization: token } }
+    );
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const likeOrDislikePost = async (postID) => {
-  const { token } = localStorage;
+  try {
+    const { token } = localStorage;
 
-  await axios.patch(urlGenerator("posts", `/posts/${postID}/like`), null, {
-    headers: { Authorization: token },
-  });
+    await axios.patch(urlGenerator("posts", `/posts/${postID}/like`), null, {
+      headers: { Authorization: token },
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const Controls = ({ postID }) => {
@@ -45,6 +51,7 @@ const Controls = ({ postID }) => {
       <div className="controls_comments">
         <input
           type="text"
+          id="commentsInput"
           className="controls_comments_input"
           onKeyDown={(e) => sendComment(e, postID)}
         />
@@ -99,7 +106,7 @@ export default class Post extends Component {
               dangerouslySetInnerHTML={{ __html: post.body }}
             />
             <Comments comments={post.comments} postID={post._id} />
-            {user ? <Controls postID={post._id} /> : false}
+            {authenticateUser() ? <Controls postID={post._id} /> : false}
           </div>
         </Container>
       );

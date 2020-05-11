@@ -52,6 +52,7 @@ export default function Comments({ comments, postID }) {
       {user ? (
         <input
           type="text"
+          id="commentInput"
           placeholder="Comment on this post!"
           onKeyDown={submitComment}
           className="comments_input"
