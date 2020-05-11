@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, capitalize } from "@material-ui/core";
 import PostCard from "../../imports/PostCard";
 import Sidebar from "../../imports/Sidebar";
-import DashboardHeader from "../../imports/DashboardHeader";
+import Header from "../../imports/Header";
 import urlGenerator from "../../../helpers/urlGenerator";
 import authenticateUser from "../../../helpers/authenticateUser";
 import axios from "axios";
@@ -97,7 +97,7 @@ export default class ProfilePage extends Component {
         <Container>
           <Sidebar user={authenticateUser()} history={this.props.history} />
           <div className="dashboard">
-            <DashboardHeader user={user} />
+            <Header user={user} />
             <Container
               className="hero"
               style={{

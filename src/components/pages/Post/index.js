@@ -32,6 +32,7 @@ export default class Post extends Component {
           {/* Load markdown-air CSS stylesheet */}
           <Sidebar history={this.props.history} />
           <div className="post">
+            {/* <Header /> */}
             <h3 className="post_title" style={{ marginTop: 0 }}>
               {post.title}
             </h3>
