@@ -32,6 +32,7 @@ export default class Post extends Component {
     if (!post && !user) return <p>Waiting</p>;
     // TODO: Implement loader
     else {
+      document.title = `youa.dev - ${post.title}`;
       return (
         <Container>
           {/* Load markdown-air CSS stylesheet */}

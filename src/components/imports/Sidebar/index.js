@@ -11,7 +11,7 @@ import "./style.scss";
 
 export default function Sidebar({ user = false, history }) {
   return (
-    <nav className="sidebar">
+    <nav className="sidebar shadow">
       <ul className="sidebar_icons_list">
         <li className="sidebar_icons_list_icon">
           <Home
