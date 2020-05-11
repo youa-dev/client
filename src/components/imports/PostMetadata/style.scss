@@ -1,0 +1,9 @@
+.post_metadata {
+  display: flex;
+  flex-direction: row;
+  &_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

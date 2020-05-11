@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
+import PostMetadata from "../PostMetadata";
 
-export default function Header({ user, post = false }) {
+export default function Header({ user, post = null }) {
   return (
     <header className="header shadow">
       <img
@@ -31,49 +32,7 @@ export default function Header({ user, post = false }) {
           >
             {post.title}
           </h2>
-          <div className="header_post_metadata">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginRight: 10,
-                marginLeft: 10,
-              }}
-            >
-              <span className="header_post_metadata_icon fa fa-heart"></span>
-              <p>{post.likes.length}</p>
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginRight: 10,
-                marginLeft: 10,
-              }}
-            >
-              <span className="header_post_metadata_icon fa fa-eye"></span>
-              <p>{post.views}</p>
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginRight: 10,
-                marginLeft: 10,
-              }}
-            >
-              <span className="header_post_metadata_icon fa fa-commenting"></span>
-              <p>{post.comments.length}</p>
-            </div>
-          </div>
+          <PostMetadata post={post} />
         </Fragment>
       ) : (
         <Fragment>
@@ -82,7 +41,7 @@ export default function Header({ user, post = false }) {
             {/* Website */}
             {user.profile.website ? (
               <a href={user.profile.website} className="header_links_link">
-                <span className="fas fa-globe header_links_link_icon"></span>
+                <span className="fas fa-globe header_links_link_icon" />
               </a>
             ) : (
               false
@@ -90,7 +49,7 @@ export default function Header({ user, post = false }) {
             {/* GitHub */}
             {user.profile.github ? (
               <a href={user.profile.github} className="header_links_link">
-                <span className="fab fa-github header_links_link_icon"></span>
+                <span className="fab fa-github header_links_link_icon" />
               </a>
             ) : (
               false
@@ -98,7 +57,7 @@ export default function Header({ user, post = false }) {
             {/* dev.to */}
             {user.profile.dev ? (
               <a href={user.profile.dev} className="header_links_link">
-                <span className="fab fa-dev header_links_link_icon"></span>
+                <span className="fab fa-dev header_links_link_icon" />
               </a>
             ) : (
               false
@@ -106,7 +65,7 @@ export default function Header({ user, post = false }) {
             {/* LinkedIn */}
             {user.profile.linkedin ? (
               <a href={user.profile.linkedin} className="header_links_link">
-                <span className="fab fa-linkedin header_links_link_icon"></span>
+                <span className="fab fa-linkedin header_links_link_icon" />
               </a>
             ) : (
               false
@@ -117,7 +76,7 @@ export default function Header({ user, post = false }) {
                 href={user.profile.stackoverflow}
                 className="header_links_link"
               >
-                <span className="fab fa-stack-overflow header_links_link_icon"></span>
+                <span className="fab fa-stack-overflow header_links_link_icon" />
               </a>
             ) : (
               false

@@ -1,4 +1,12 @@
-.dashboard {
+.post_metadata_wrapper {
+  margin: 0 7.5px;
+  flex-direction: column;
+  &_icon {
+    margin-right: 0;
+  }
+}
+
+.profile {
   position: absolute;
   left: 0;
   width: 100vw;

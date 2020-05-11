@@ -1,6 +1,14 @@
 @import "../../../assets/scss/_vars";
 $header_padding: 25px;
 
+.post_metadata_wrapper {
+  margin-left: 7.5px;
+  margin-right: 7.5px;
+  &_icon {
+    margin-right: 5px;
+  }
+}
+
 .header {
   position: relative;
   top: 0;
@@ -13,15 +21,6 @@ $header_padding: 25px;
   align-items: center;
   &_post_title {
     text-overflow: ellipsis;
-  }
-  &_post_metadata {
-    display: flex;
-    flex-direction: row;
-    &_icon {
-      &::before {
-        margin-right: 3px;
-      }
-    }
   }
   &_name {
     margin-top: 16px;
