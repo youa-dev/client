@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { Input, InputLabel, FormControl } from "@material-ui/core";
 import FormButton from "../FormButton";
 import "./style.scss";
 import axios from "axios";
 import urlGenerator from "../../../helpers/urlGenerator";
 import forceUpdateEvent from "../../../helpers/forceUpdateEvent";
+import authenticateUser from "../../../helpers/authenticateUser";
 
 const handleIcons = ({ target, type }) => {
   const icons = document.querySelectorAll("span");
@@ -28,6 +29,7 @@ const handleIcons = ({ target, type }) => {
 };
 
 export default function ProfileCreationForm() {
+  const user = authenticateUser();
   const [website, setWebsite] = useState();
   const [github, setGitHub] = useState();
   const [dev, setDev] = useState();
@@ -58,7 +60,9 @@ export default function ProfileCreationForm() {
       if (e.response) document.dispatchEvent(forceUpdateEvent(e.response.data));
     }
   };
-  return (
+  return user.profile ? (
+    <Redirect to={user.profile.handle} />
+  ) : (
     <form
       noValidate
       autoComplete="off"

@@ -5,7 +5,7 @@ import authenticateUser from "../../../helpers/authenticateUser";
 export default function ProtectedRoute({
   path,
   component: Component,
-  redirectTo = "/login",
+  redirectPath = "/login",
 }) {
   return (
     <Route
@@ -13,7 +13,7 @@ export default function ProtectedRoute({
       exact
       path={path}
       render={() =>
-        authenticateUser() ? <Component /> : <Redirect to={redirectTo} />
+        authenticateUser() ? <Component /> : <Redirect to={redirectPath} />
       }
     />
   );

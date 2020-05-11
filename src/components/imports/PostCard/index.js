@@ -30,27 +30,27 @@ const dateHelper = {
 };
 
 const generateDate = (timestamp) => {
-  let extension;
+  // let extension;
   const d = new Date(timestamp);
   const month = dateHelper.months[d.getUTCMonth()];
   const day = dateHelper.days[d.getUTCDay()];
   const year = d.getUTCFullYear();
   const date = d.getUTCDate().toString();
-  switch (date[date.length - 1]) {
-    case "1":
-      extension = "st";
-      break;
-    case "2":
-      extension = "nd";
-      break;
-    case "3":
-      extension = "nd";
-      break;
-    default:
-      extension = "th";
-      break;
-  }
-  return `${day}, ${month} ${date}${extension}, ${year}`;
+  // switch (date[date.length - 1]) {
+  //   case "1":
+  //     extension = "st";
+  //     break;
+  //   case "2":
+  //     extension = "nd";
+  //     break;
+  //   case "3":
+  //     extension = "nd";
+  //     break;
+  //   default:
+  //     extension = "th";
+  //     break;
+  // }
+  return `${day}, ${month} ${date}, ${year}`;
 };
 
 export default function PostCard({ avatar, firstName, lastName, post }) {
