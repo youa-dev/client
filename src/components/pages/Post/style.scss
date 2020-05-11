@@ -1,0 +1,17 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &_body {
+    width: 80%;
+  }
+}
+
+@media (max-width: 649px) {
+  .post_body {
+    margin-bottom: 50px;
+    width: 100%;
+  }
+}
