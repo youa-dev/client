@@ -35,8 +35,6 @@ export default function Comments({ comments, postID }) {
     const { token } = localStorage;
     const { value: body } = target;
 
-    console.log(token);
-
     await axios.post(
       urlGenerator("posts", `/comments/new/${postID}`),
       { body },

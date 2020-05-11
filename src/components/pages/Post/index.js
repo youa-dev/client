@@ -4,8 +4,61 @@ import Sidebar from "../../imports/Sidebar";
 import Header from "../../imports/Header";
 import axios from "axios";
 import urlGenerator from "../../../helpers/urlGenerator";
+import authenticateUser from "../../../helpers/authenticateUser";
 import "./style.scss";
 import Comments from "../../imports/Comments";
+
+const sendComment = async ({ keyCode, target }, postID) => {
+  if (target.tagName === "INPUT" && keyCode !== 13) return;
+
+  const body =
+    target.tagName === "INPUT"
+      ? target.value
+      : document.getElementById("commentInput").value;
+  const { token } = localStorage;
+
+  await axios.post(
+    urlGenerator("posts", `/comments/new/${postID}`),
+    { body },
+    { headers: { Authorization: token } }
+  );
+};
+
+const likeOrDislikePost = async (postID) => {
+  const { token } = localStorage;
+
+  await axios.patch(urlGenerator("posts", `/posts/${postID}/like`), null, {
+    headers: { Authorization: token },
+  });
+};
+
+const Controls = ({ postID }) => {
+  return (
+    <div className="controls">
+      <button
+        className="controls_like"
+        onClick={likeOrDislikePost.bind(null, postID)}
+      >
+        Like
+      </button>
+      {/* TODO: Replace button text with an icon */}
+      <div className="controls_comments">
+        <input
+          type="text"
+          className="controls_comments_input"
+          onKeyDown={(e) => sendComment(e, postID)}
+        />
+        {/* TODO: Replace button text with an icon */}
+        <button
+          className="controls_comments_input_btn"
+          onClick={(e) => sendComment(e, postID)}
+        >
+          Submit
+        </button>{" "}
+      </div>
+    </div>
+  );
+};
 
 export default class Post extends Component {
   constructor(props) {
@@ -46,6 +99,7 @@ export default class Post extends Component {
               dangerouslySetInnerHTML={{ __html: post.body }}
             />
             <Comments comments={post.comments} postID={post._id} />
+            {user ? <Controls postID={post._id} /> : false}
           </div>
         </Container>
       );
