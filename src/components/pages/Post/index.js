@@ -40,29 +40,23 @@ const likeOrDislikePost = async (postID) => {
 
 const Controls = ({ postID }) => {
   return (
-    <div className="controls">
-      <button
-        className="controls_like"
+    <div className="controls shadow">
+      <span
+        className="controls_like_btn fas fa-heart controls_icon"
         onClick={likeOrDislikePost.bind(null, postID)}
-      >
-        Like
-      </button>
+      />
       {/* TODO: Replace button text with an icon */}
-      <div className="controls_comments">
-        <input
-          type="text"
-          id="commentsInput"
-          className="controls_comments_input"
-          onKeyDown={(e) => sendComment(e, postID)}
-        />
-        {/* TODO: Replace button text with an icon */}
-        <button
-          className="controls_comments_input_btn"
-          onClick={(e) => sendComment(e, postID)}
-        >
-          Submit
-        </button>{" "}
-      </div>
+      <input
+        type="text"
+        id="commentsInput"
+        className="controls_comment_input"
+        onKeyDown={(e) => sendComment(e, postID)}
+      />
+      {/* TODO: Replace button text with an icon */}
+      <span
+        className="fas fa-paper-plane controls_comment_btn controls_icon"
+        onClick={(e) => sendComment(e, postID)}
+      />
     </div>
   );
 };
@@ -96,7 +90,6 @@ export default class Post extends Component {
       document.title = `youa.dev - ${post.title}`;
       return (
         <Container>
-          {/* Load markdown-air CSS stylesheet */}
           <Sidebar history={this.props.history} />
           <div className="post" style={{ marginBottom: 50 }}>
             <Header user={user} post={post} />
@@ -105,8 +98,8 @@ export default class Post extends Component {
               className="markdown-body post_body"
               dangerouslySetInnerHTML={{ __html: post.body }}
             />
-            <Comments comments={post.comments} postID={post._id} />
             {authenticateUser() ? <Controls postID={post._id} /> : false}
+            <Comments comments={post.comments} />
           </div>
         </Container>
       );

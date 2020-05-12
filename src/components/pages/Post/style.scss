@@ -1,3 +1,5 @@
+@import "../../../assets/scss/_vars";
+
 .post {
   display: flex;
   flex-direction: column;
@@ -9,8 +11,56 @@
   }
 }
 
+.controls {
+  width: 80%;
+  padding: 1em 0;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: $primary_color;
+  * {
+    margin: auto 5px;
+  }
+  &_icon {
+    background-color: #fff;
+    padding: 0.5em;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all ease-in-out 0.15s;
+  }
+
+  &_comment_input {
+    width: 100%;
+  }
+
+  &_comment_btn {
+    margin-right: 15px;
+    color: rgb(43, 207, 114);
+    &:hover {
+      background-color: rgb(43, 207, 114);
+      color: #fff;
+    }
+  }
+
+  &_like_btn {
+    margin-left: 15px;
+    color: rgb(255, 128, 177);
+    &:hover {
+      background-color: rgb(255, 128, 177);
+      color: #fff;
+    }
+  }
+}
+
 @media (max-width: 649px) {
-  .post_body {
+  .controls {
+    padding: 0.5em 0;
+  }
+
+  .post_body,
+  .controls {
     width: 100%;
   }
 }

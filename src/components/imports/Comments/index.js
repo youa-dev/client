@@ -26,39 +26,13 @@ const CommentsCard = ({ details }) => {
   );
 };
 
-export default function Comments({ comments, postID }) {
-  const user = authenticateUser();
-
-  const submitComment = async ({ keyCode, target }) => {
-    if (keyCode !== 13) return;
-
-    const { token } = localStorage;
-    const { value: body } = target;
-
-    await axios.post(
-      urlGenerator("posts", `/comments/new/${postID}`),
-      { body },
-      { headers: { Authorization: token } }
-    );
-  };
-
+export default function Comments({ comments }) {
   return (
     <div className="comments">
       {comments.length > 0 ? (
         comments.reverse().map((c) => <CommentsCard details={c} key={c._id} />)
       ) : (
         <p>No comments!</p>
-      )}
-      {user ? (
-        <input
-          type="text"
-          id="commentInput"
-          placeholder="Comment on this post!"
-          onKeyDown={submitComment}
-          className="comments_input"
-        />
-      ) : (
-        false
       )}
     </div>
   );
