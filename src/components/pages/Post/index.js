@@ -55,6 +55,7 @@ const Controls = ({ postID }) => {
       <TextField
         id="filled-basic commentsInput"
         variant="standard"
+        label="Your comment: "
         onKeyDown={(e) => sendComment(e, postID)}
         className="controls_comment_input"
       />

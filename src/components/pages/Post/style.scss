@@ -33,7 +33,13 @@
 
   &_comment_input {
     width: 100%;
+    margin-bottom: 20px !important;
   }
+
+  label {
+    color: white !important;
+  }
+
   .MuiInput-input {
     color: white;
   }

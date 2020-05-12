@@ -1,67 +1,40 @@
+@import "../../../assets/scss/_vars";
+
 .post_card {
   display: flex;
-  flex-direction: row;
-  margin-bottom: 25px;
-  justify-content: space-around;
-  align-items: center;
-  width: 50%;
-  &_col {
-    display: flex;
-    flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  &_row {
     &--user {
-      justify-content: center;
+      display: flex;
+      flex-direction: row;
       align-items: center;
     }
     &_avatar {
-      margin-top: 10px;
       width: 64px;
       height: 64px;
       border-radius: 50%;
+      margin-right: 10px;
     }
     &_text,
     &_icon {
       margin: 10px 0;
     }
     &_text {
-      overflow: hidden;
-      white-space: nowrap;
       text-overflow: ellipsis;
       &--name {
         text-transform: capitalize;
+      }
+      &--link {
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
       }
     }
     &_icon {
       font-weight: bold !important;
       &::before {
         margin-right: 5px;
-      }
-    }
-  }
-}
-
-@media (max-width: 1024px) {
-  .post_card {
-    width: 75%;
-    &_col {
-      &_avatar {
-        width: 64px;
-        height: 64px;
-      }
-      &_icon,
-      &_text {
-        margin: 5px 0;
-      }
-    }
-  }
-}
-
-@media (max-width: 649px) {
-  .post_card {
-    width: 90%;
-    &_col {
-      &_icon,
-      &_text {
-        margin: 5px 0;
       }
     }
   }
