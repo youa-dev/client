@@ -8,9 +8,14 @@
   &_col {
     display: flex;
     flex-direction: column;
+    &--user {
+      justify-content: center;
+      align-items: center;
+    }
     &_avatar {
-      width: 96px;
-      height: 96px;
+      margin-top: 10px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
     }
     &_text,

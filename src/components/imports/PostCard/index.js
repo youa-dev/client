@@ -7,16 +7,16 @@ import generateDate from "../../../helpers/generateDate";
 export default function PostCard({ avatar, firstName, lastName, post }) {
   return (
     <div className="post_card shadow">
-      <div className="post_card_col">
+      <div className="post_card_col post_card_col--user">
         <img src={avatar} alt="avatar" className="post_card_col_avatar" />
+        <p className="post_card_col_text post_card_col_text--name">
+          {firstName} {lastName}
+        </p>
       </div>
       <div className="post_card_col">
         <Link className="post_card_col_text" to={`/post/${post.handle}`}>
           {post.title}
         </Link>
-        <p className="post_card_col_text post_card_col_text--name">
-          {firstName} {lastName}
-        </p>
         <p className="post_card_col_text">{generateDate(post.createdAt)}</p>
       </div>
       <PostMetadata post={post} />

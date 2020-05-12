@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "@material-ui/core";
+import { Container, TextField } from "@material-ui/core";
 import Sidebar from "../../imports/Sidebar";
 import Header from "../../imports/Header";
 import axios from "axios";
@@ -46,11 +46,17 @@ const Controls = ({ postID }) => {
         onClick={likeOrDislikePost.bind(null, postID)}
       />
       {/* TODO: Replace button text with an icon */}
-      <input
+      {/* <input
         type="text"
         id="commentsInput"
         className="controls_comment_input"
         onKeyDown={(e) => sendComment(e, postID)}
+      /> */}
+      <TextField
+        id="filled-basic commentsInput"
+        variant="standard"
+        onKeyDown={(e) => sendComment(e, postID)}
+        className="controls_comment_input"
       />
       {/* TODO: Replace button text with an icon */}
       <span
