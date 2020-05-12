@@ -1,9 +1,14 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import authenticateUser from "../../../helpers/authenticateUser";
+import { Button } from "@material-ui/core";
 import "./style.scss";
 import PostMetadata from "../PostMetadata";
 
 export default function Header({ user, post = null }) {
+  const history = useHistory();
+  const handleBtnClick = () =>
+    authenticateUser() ? console.log("Following user") : history.push("/login");
   return (
     <header className="header shadow">
       <img
@@ -20,10 +25,22 @@ export default function Header({ user, post = null }) {
           {user.firstName} {user.lastName}
         </Link>
       ) : (
-        <h3 className="header_name">
-          {user.firstName} {user.lastName}
-        </h3>
+        <Fragment>
+          <h3 className="header_name">
+            {user.firstName} {user.lastName}
+          </h3>
+          <Button
+            className="header_follow_btn"
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={handleBtnClick}
+          >
+            Follow
+          </Button>
+        </Fragment>
       )}
+
       {post ? (
         <Fragment>
           <h2

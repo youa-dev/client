@@ -45,13 +45,6 @@ const Controls = ({ postID }) => {
         className="controls_like_btn fas fa-heart controls_icon"
         onClick={likeOrDislikePost.bind(null, postID)}
       />
-      {/* TODO: Replace button text with an icon */}
-      {/* <input
-        type="text"
-        id="commentsInput"
-        className="controls_comment_input"
-        onKeyDown={(e) => sendComment(e, postID)}
-      /> */}
       <TextField
         id="filled-basic commentsInput"
         variant="standard"
@@ -59,7 +52,6 @@ const Controls = ({ postID }) => {
         onKeyDown={(e) => sendComment(e, postID)}
         className="controls_comment_input"
       />
-      {/* TODO: Replace button text with an icon */}
       <span
         className="fas fa-paper-plane controls_comment_btn controls_icon"
         onClick={(e) => sendComment(e, postID)}
