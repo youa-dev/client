@@ -7,6 +7,16 @@ import urlGenerator from "../../../helpers/urlGenerator";
 import axios from "axios";
 import "./style.scss";
 
+const followUser = async (profileID) => {
+  const { data: res } = await axios.patch(
+    urlGenerator("auth", `/profile/follow/${profileID}`),
+    null,
+    { headers: { Authorization: localStorage.token } }
+  );
+  const { token } = res;
+  localStorage.token = token;
+};
+
 export default class ProfilePage extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +55,7 @@ export default class ProfilePage extends Component {
         <Container>
           <Sidebar history={this.props.history} />
           <div className="profile">
-            <Header user={user} />
+            <Header user={user} followUser={() => followUser(user.id)} />
             <Container
               className="hero"
               style={{

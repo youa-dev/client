@@ -5,10 +5,11 @@ import { Button } from "@material-ui/core";
 import "./style.scss";
 import PostMetadata from "../PostMetadata";
 
-export default function Header({ user, post = null }) {
+export default function Header({ user, post = null, followUser }) {
   const history = useHistory();
+  const loggedInUser = authenticateUser();
   const handleBtnClick = () =>
-    authenticateUser() ? console.log("Following user") : history.push("/login");
+    loggedInUser ? followUser() : history.push("/login");
   return (
     <header className="header shadow">
       <img
@@ -29,15 +30,19 @@ export default function Header({ user, post = null }) {
           <h3 className="header_name">
             {user.firstName} {user.lastName}
           </h3>
-          <Button
-            className="header_follow_btn"
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={handleBtnClick}
-          >
-            Follow
-          </Button>
+          {!post && user.id !== loggedInUser.id ? (
+            <Button
+              className="header_follow_btn"
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={handleBtnClick}
+            >
+              Follow
+            </Button>
+          ) : (
+            false
+          )}
         </Fragment>
       )}
 
