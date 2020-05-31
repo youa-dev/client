@@ -30,7 +30,7 @@ export default function Header({ user, post = null, followUser }) {
           <h3 className="header_name">
             {user.firstName} {user.lastName}
           </h3>
-          {!post && user.id !== loggedInUser.id ? (
+          {!post && (!loggedInUser || user.id !== loggedInUser.id) ? (
             <Button
               className="header_follow_btn"
               variant="contained"
